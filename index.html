@@ -49,19 +49,18 @@
                         <div class="card-header">
                             <p class ="card-title h3">Enter a city to populate information below!</p>
                         </div>
-                        <div class="card-body">
-                            <p>Temp: </p>
-                            <p>Wind: </p>
-                            <p>Humidity: </p>
-                            <p>UV Index: </p>
+                        <div id="currentForecastContainer" class="card-body d-flex flex-column">
+                            <div id="currentLocation"></div>
+                            <div id="currentTemp"></div>
+                            <div id="currentWind"></div>
+                            <div id="currentHumidity"></div>
+                            <div id="currentUV"></div>
                         </div>
                     </div>
 
                     <p class="h2 my-2">5-Day Forecast:</p>
                     
-                    <div class="row my-3" id="searchForecastContainer">
-                        <div class="card bg-dark mx-2 hidden" id="searchForecastContainer"></div>
-                </div>
+                    <div class="row my-3 d-flex justify-content-center" id="searchForecastContainer"></div>
 
             </div>
         </div>
