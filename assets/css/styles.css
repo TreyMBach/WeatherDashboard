@@ -5,3 +5,41 @@
     max-width: 10%;
     margin-left: 35px;
 }
+
+.currentWeatherImg{
+    max-width: 10%;
+    margin-left: 20px;
+}
+
+.lowUV,
+.moderateUV,
+.highUV,
+.veryHighUV,
+.extremeUV{
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 22%;
+}
+
+
+.lowUV{
+    background-color: green;
+}
+
+.moderateUV{
+    background-color: lightgreen;
+}
+
+.highUV{
+    background-color: rgb(249, 103, 103)
+}
+
+.veryHighUV{
+    background-color: red;
+}
+
+.extremeUV{
+    background-color: black;
+    color: white;
+}
