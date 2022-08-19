@@ -12,7 +12,7 @@ searchForecastContainer = document.getElementById("searchForecastContainer")
 
 
 function getCity(city){
-    var geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+    var geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
   
     fetch(geocodeUrl)
       .then(function (response) {
@@ -139,14 +139,18 @@ function getCity(city){
             currentUVEl.classList.add("extremeUV")
           } 
 
-          
-
         });
+
+      }
+
+      function clearsearchHistory(){
+        searchForecastContainer.textContent = ""
       }
 
 
 
       searchBtn.addEventListener("click", function(){
+        clearsearchHistory()
         searchInput = document.getElementById("citySearchInput").value;
         console.log(searchInput)
         getCity(searchInput);
@@ -161,6 +165,8 @@ function getCity(city){
         })
         console.log(localStorage)
       }
+
+  
 
 
 
