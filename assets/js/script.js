@@ -78,6 +78,8 @@ function getCity(city){
               searchResultWeather.src = "https://cdn.pixabay.com/photo/2013/04/01/09/22/clouds-98536_1280.png"
             } else if (data.daily[i].weather[0].main == "Rain"){
               searchResultWeather.src = "https://cdn.pixabay.com/photo/2017/01/29/11/09/rain-2017532_1280.png"
+            } else if (data.daily[i].weather[0].main == "Clear"){
+              searchResultWeather.src = "https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009__340.png"
             }
 
             var searchResultCard = document.createElement("div")
@@ -108,6 +110,8 @@ function getCity(city){
             currentWeatherImg.src = "https://cdn.pixabay.com/photo/2013/04/01/09/22/clouds-98536_1280.png"
           } else if (data.daily[0].weather[0].main == "Rain"){
             currentWeatherImg.src = "https://cdn.pixabay.com/photo/2017/01/29/11/09/rain-2017532_1280.png"
+          } else if (data.daily[0].weather[0].main == "Clear"){
+            currentWeatherImg.src = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.icon-icons.com%2Ficons2%2F2505%2FPNG%2F512%2Fsunny_weather_icon_150663.png&imgrefurl=https%3A%2F%2Ficon-icons.com%2Ficon%2Fsunny-weather%2F150663&tbnid=1uoQQ_kPMSIPhM&vet=12ahUKEwjlxfir0NH5AhUPKjQIHTZZCSkQMygOegUIARDmAQ..i&docid=UYqDXbpaUJc5GM&w=512&h=512&q=clear%20weather%20icon&ved=2ahUKEwjlxfir0NH5AhUPKjQIHTZZCSkQMygOegUIARDmAQ"
           }
 
           var currentTempEl = document.getElementById("currentTemp")
@@ -148,23 +152,44 @@ function getCity(city){
       }
 
 
+      function saveRecentSearches(){
+        searchInput = document.getElementById("citySearchInput").value;
+        localStorage.setItem("searchInput", searchInput)
+        recentSearches.push(localStorage.getItem("searchInput"))
+        console.log(localStorage)
+        localStorage.setItem("recentSearches", recentSearches)
+      }
 
       searchBtn.addEventListener("click", function(){
         clearsearchHistory()
+        saveRecentSearches()
         searchInput = document.getElementById("citySearchInput").value;
         console.log(searchInput)
         getCity(searchInput);
+        showRecentSearches()
+
       })
 
+
       function showRecentSearches(){
-        recentSearches = JSON.parse(localStorage.getItem("searchInput"))
-        recentSearches.forEach(function(item){
-          var recentSearchLi = document.createElement("li")
-          recentSearchLi.textContent = item.searchInput
-          recentSearchesListEl.append(recentSearchLi)
-        })
-        console.log(localStorage)
-      }
+        console.log(recentSearches)
+        recentSearchesListEl.innerHTML = ''
+        for(var i = 0; i < recentSearches.length; i++){
+          console.log(recentSearches[i])
+          var recentSearchButton = document.createElement("button")
+
+          recentSearchButton.innerHTML = recentSearches[i]
+          
+          recentSearchesListEl.append(recentSearchButton)
+
+          recentSearchButton.addEventListener("click", function(){
+            clearsearchHistory();
+            getCity("London", geocodeUrl);
+          })
+        }
+       }
+
+       showRecentSearches()
 
   
 
