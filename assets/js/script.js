@@ -10,7 +10,7 @@ searchBtn = document.getElementById("searchButton")
 searchForecastContainer = document.getElementById("searchForecastContainer")
 
 
-
+// Fetch code for the weather api
 function getCity(city){
     var geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
   
@@ -26,7 +26,7 @@ function getCity(city){
         getWeather(data[0].lat, data[0].lon);
       });
     }
-  
+      // Gets the api data based on the latitude and the longitude
       function getWeather(lat, lon){
         var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}&exclude=hourly,minutely,alerts`
   
@@ -40,7 +40,7 @@ function getCity(city){
           console.log(data);
 
 
-          // displays the date, an icon representation of weather conditions, the temperature, the wind speed, the humidity
+          // displays the date, an icon representation of weather conditions, the temperature, the wind speed, the humidity using a for loop
           for (let i = 1; i < 6; i++){  
     
             var searchResultDate = document.createElement("ul")
@@ -49,19 +49,10 @@ function getCity(city){
             var currentTemp = data.current.temp
             var currentWind = data.current.wind_speed
             var currentHumidity = data.current.humidity
-            // var currentWeather = data.current.weather[0].main
             var currentUV = data.daily[0].uvi
 
 
-            // var searchResultIcon = document.createElement("ul")
-            // if(data.daily[i].temp.eve >= 80){
-            //   searchResultIcon.innerText = "It's looking like a good day!"
-            // } else if (data.daily[i].temp.eve < 80 && data.daily[i].temp.eve > 70){
-            //   searchResultIcon.innerText = "You could probably Sun Bask"
-            // } else {
-            //   searchResultIcon.innerText = "could be better"
-            // }
-
+            // Creating elements for the temp, wind speed, humidity %, and weather image.
             var searchResultTemp = document.createElement("ul")
             searchResultTemp.innerText = data.daily[i].temp.eve
 
@@ -74,6 +65,7 @@ function getCity(city){
             var searchResultWeather = document.createElement("img")
             searchResultWeather.classList.add("searchWeatherImg")
             
+            //  Gives images based on the weather like clouds rain and clear sunshine
             if(data.daily[i].weather[0].main == "Clouds"){
               searchResultWeather.src = "https://cdn.pixabay.com/photo/2013/04/01/09/22/clouds-98536_1280.png"
             } else if (data.daily[i].weather[0].main == "Rain"){
@@ -93,7 +85,6 @@ function getCity(city){
 
             searchForecastContainer.append(searchResultCard)
             searchResultCard.appendChild(searchResultDate)
-            // searchResultCard.appendChild(searchResultIcon)
             searchResultCard.appendChild(searchResultTemp)
             searchResultCard.appendChild(searchResultWind)
             searchResultCard.appendChild(searchResultHumidity)
@@ -101,11 +92,13 @@ function getCity(city){
             
           }
 
+          // Having the search input return the value
           var searchInput = document.getElementById("citySearchInput").value; 
           var currentLocationEl = document.getElementById("currentLocation")
           var currentWeatherImg = document.createElement("img")
           currentWeatherImg.classList.add("currentWeatherImg")
 
+          // Gives the src for the weather for the current forecast
           if(data.daily[0].weather[0].main == "Clouds"){
             currentWeatherImg.src = "https://cdn.pixabay.com/photo/2013/04/01/09/22/clouds-98536_1280.png"
           } else if (data.daily[0].weather[0].main == "Rain"){
@@ -119,6 +112,7 @@ function getCity(city){
           var currentHumidityEl = document.getElementById("currentHumidity")
           var currentUVEl = document.getElementById("currentUV")
 
+          // Gives current day, and all current Temp, Wind speed, humidity levels, and current UV Level
           currentLocationEl.innerHTML = searchInput + " " + moment.unix(data.daily[0].dt).format("dddd, MMMM Do YYYY")
           currentLocationEl.append(currentWeatherImg)
           currentTempEl.innerHTML = "Temp:" + currentTemp + " Degrees"
@@ -126,6 +120,7 @@ function getCity(city){
           currentHumidityEl.innerHTML = "Humidity: " + currentHumidity + " Percent Humidity"
           currentUVEl.innerHTML = "UV Index: " + currentUV
 
+          // Adds certain class for the current UV to be able to change the color.
           if (currentUV <= 2){
             currentUVEl.classList.add("lowUV")
             console.log("The UV IS Low")
@@ -147,11 +142,13 @@ function getCity(city){
 
       }
 
+      // Resets the search history.
       function clearsearchHistory(){
         searchForecastContainer.textContent = ""
       }
 
 
+      // saves the recent searches based on the local storage.
       function saveRecentSearches(){
         searchInput = document.getElementById("citySearchInput").value;
         localStorage.setItem("searchInput", searchInput)
@@ -160,6 +157,7 @@ function getCity(city){
         localStorage.setItem("recentSearches", recentSearches)
       }
 
+      // SHows the results from the search input
       searchBtn.addEventListener("click", function(){
         clearsearchHistory()
         saveRecentSearches()
@@ -167,10 +165,9 @@ function getCity(city){
         console.log(searchInput)
         getCity(searchInput);
         showRecentSearches()
-
       })
 
-
+      // Shows the recent searches
       function showRecentSearches(){
         console.log(recentSearches)
         recentSearchesListEl.innerHTML = ''

@@ -1,37 +1,33 @@
-# WeatherDashboard
- 
-User Story
+# Weather Dashboard
+  
+  ## Project Description:
 
-**AS A traveler**
+    To be able to see the future forecast and be able to plan my trip accordingly.
 
-**I WANT to see the weather outlook for multiple cities**
+    - [Installation](##installation)
+    - [Usage](##usage)
+    - [Credits](##credits)
+    - [License](##license)
 
-**SO THAT I can plan a trip accordingly**
+    ## Installation
 
+    Vanilla JS, HTML, WeatherBoard API
 
+    ## Usage
 
-Acceptance Criteria
+    Use the live application and search the city that you would like the current and 5 day forecast for.
 
-GIVEN a weather dashboard with form inputs
+    ##License
 
-WHEN I search for a city
+    The license we used is MIT.
+    
+    ## Links
 
-THEN I am presented with current and future conditions for that city and that city is added to the search history
+    My github link github.com/TreyMBach.
+    My LinkedIN is Link
 
-WHEN I view current weather conditions for that city
-
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-
-WHEN I view the UV index
-
-THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-WHEN I view future weather conditions for that city
-
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
-WHEN I click on a city in the search history
-
-THEN I am again presented with current and future conditions for that city
+  
 
 ![](Images/06-server-side-apis-homework-demo.png)
+![](Images/HomePage.PNG)
+![](Images/SearchPage.PNG)
